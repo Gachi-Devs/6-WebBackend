@@ -1,0 +1,17 @@
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\RaspFactory.exe
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\RaspFactory.deps.json
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\RaspFactory.runtimeconfig.json
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\RaspFactory.runtimeconfig.dev.json
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\RaspFactory.dll
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\ref\RaspFactory.dll
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\RaspFactory.pdb
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.GeneratedMSBuildEditorConfig.editorconfig
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.AssemblyInfoInputs.cache
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.AssemblyInfo.cs
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.csproj.CoreCompileInputs.cache
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.dll
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\ref\RaspFactory.dll
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.pdb
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.genruntimeconfig.cache
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\obj\Debug\net5.0\RaspFactory.csproj.AssemblyReference.cache
+R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\bin\Debug\net5.0\Newtonsoft.Json.dll
