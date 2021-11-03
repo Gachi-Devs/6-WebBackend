@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jVHzPtgOTi5OP7YrfNiGJ80YpU29UUEd6Y09usHCZKsC0u4FgLAaj6svwam5RSpZ4Zc9fqhFBWlmk48QQCrSoQ==",
+  "dgSpecHash": "z/VtOTUXUGgZkEAvwyCECBgXUqtBeFei+QvJkvvv0/ylpGPWLBVsxJSKcAcVPx27TOYbNNavWkSY8kTe0QjIQg==",
   "success": true,
-  "projectFilePath": "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
+  "projectFilePath": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ITheM\\.nuget\\packages\\aspose.cells\\21.10.0\\aspose.cells.21.10.0.nupkg.sha512",
     "C:\\Users\\ITheM\\.nuget\\packages\\documentformat.openxml\\2.13.1\\documentformat.openxml.2.13.1.nupkg.sha512",

@@ -1090,11 +1090,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
+      "projectUniqueName": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
       "projectName": "RaspFactory",
-      "projectPath": "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
+      "projectPath": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
       "packagesPath": "C:\\Users\\ITheM\\.nuget\\packages\\",
-      "outputPath": "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\obj\\",
+      "outputPath": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "R:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

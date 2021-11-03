@@ -18,7 +18,7 @@ namespace RaspFactory.Parser
         public void Pars()
         {
             string xmlFile = "";
-            string path = "P:\\ITheM\\Documents\\TESTJSON\\XML.xml";
+            string path = "P:\\ITheM\\Documents\\TESTJSON\\1.xml";
             String line;
             try
             {
@@ -78,13 +78,13 @@ namespace RaspFactory.Parser
 
 
 
-               /* string[] indexOfWeek = sheet[i].Split("День недели");
+                string[] indexOfWeek = sheet[i].Split("<cell>День недели");
                 for (int iow = 1; iow < indexOfWeek.Length; iow++)
                 {
                     
-                    string infoConcatWithWeek = indexOfWeek[0] + indexOfWeek[iow];*/
+                    string infoConcatWithWeek = indexOfWeek[0] + indexOfWeek[iow];
 
-                    string[] rows = /*infoConcatWithWeek*/sheet[i].Split("<row>");
+                    string[] rows = infoConcatWithWeek.Split("<row>");
                     for (int j = 0; j < rows.Length; j++)
                     {
 
@@ -546,7 +546,7 @@ namespace RaspFactory.Parser
                         File.WriteAllText($"{pathToEndFiles}\\Data{facultyIndex}{formOfEduIndex}{courceIndex}{weekIndex}.json", JsonConvert.SerializeObject(json));
                         //findex += 1;
                     }
-               /* }*/
+                }
 
 
 
