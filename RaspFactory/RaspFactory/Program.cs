@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RaspFactory.Parser;
+using System;
 using System.Collections.Generic;
 
 namespace RaspFactory
@@ -11,14 +12,13 @@ namespace RaspFactory
 
              var p = new Parser.Parser();
              p.Pars();
+
+
             
 
+            
 
-
-
-            //var file = new List<Parser.MRaspisanie>();
-
-
+            
 
 
 

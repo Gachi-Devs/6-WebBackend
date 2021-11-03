@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace RaspFactory
+namespace RaspFactory.Converter
 {
-    class XlsxToXml : IConvertable
+    class XlsxToXml
     {
 
         public string Convert(Stream memStream)

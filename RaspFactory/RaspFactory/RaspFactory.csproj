@@ -7,13 +7,15 @@
 
   <ItemGroup>
     <Folder Include="Collector\" />
-    <Folder Include="Converter\" />
-    <Folder Include="Archiver\" />
-    <Folder Include="Terminator\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.Cells" Version="21.10.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.13.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NPOI" Version="2.5.4" />
+    <PackageReference Include="Spire.XLS" Version="11.10.4" />
   </ItemGroup>
 
 </Project>

@@ -52,25 +52,18 @@ namespace RaspFactory.Parser
 
             Console.WriteLine("-----------------------------------------------");
 
+            var Config = JsonConvert.DeserializeObject<Configuration.Models.ConfigModel>(File.ReadAllText(@"R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\Configuration\Config.json"));
+            string pathToEndFiles = Config.path;
 
 
-            /* string[] cels = xmlFile.Split("<cell>");
-             Console.WriteLine(cels.Length);
-             foreach (var r in cels)
-             {
-
-                 Console.WriteLine(r);
-
-             }*/
-            
-            
-
+            //int findex = 228;
             string[] sheet = xmlFile.Split("<sheet name=");
             for (int i = 1; i < sheet.Length; i++)
             {
 
-                int findex = 228;
+                
                 var _mrasp = new List<MRaspisanie>();
+                var _groups = new List<Group>();
                 var _weekdays = new List<DayOfWeek>();
                 var _listOfWeekDays = new List<List<DayOfWeek>>();
                 var _couples = new List<Couples>();
@@ -78,328 +71,351 @@ namespace RaspFactory.Parser
                 var _listOfListOfCouples = new List<List<List<Couples>>>();
 
                 MRaspisanie file = new MRaspisanie();
-                string fileName = "DATA";//Сделать id файла
+               // string fileName = "DATA";//Сделать id файла
                 bool isFCFull = false;
                 bool isGroupsFull = false;
+                bool isCourceFind = false;
 
 
 
-                string[] rows = sheet[i].Split("<row>");
-                for (int j = 0; j < rows.Length; j++)
+               /* string[] indexOfWeek = sheet[i].Split("День недели");
+                for (int iow = 1; iow < indexOfWeek.Length; iow++)
                 {
+                    
+                    string infoConcatWithWeek = indexOfWeek[0] + indexOfWeek[iow];*/
 
-                    string[] cells = rows[j].Split("<cell>");
-                    for (int z = 0; z < cells.Length; z++)
+                    string[] rows = /*infoConcatWithWeek*/sheet[i].Split("<row>");
+                    for (int j = 0; j < rows.Length; j++)
                     {
-                        //заполнение первичных элементов модели (не массивов)
-                        if (isFCFull == false)
+
+                        string[] cells = rows[j].Split("<cell>");
+                        for (int z = 0; z < cells.Length; z++)
                         {
-                            //Все возможные обозначения для поиска первичных элементов модели
-                            string[] firstComponents = new string[] { "Факультет", "Форма обучения", "курс", "неделя" };
-
-                            for (int jj = 0; jj < firstComponents.Length; jj++)
+                            //заполнение первичных элементов модели (не массивов)
+                            if (isFCFull == false/* && iow == 0*/)
                             {
-                                //Содержит ли клетка в себе один из элементов модели
-                                if (cells[z].Contains(firstComponents[jj], System.StringComparison.CurrentCultureIgnoreCase))
+                                //Все возможные обозначения для поиска первичных элементов модели
+                                string[] firstComponents = new string[] { "Факультет", "Форма обучения", "курс", "неделя" };
+
+                                for (int jj = 0; jj < firstComponents.Length; jj++)
                                 {
-                                    //какой элемент модели она содержит
-                                    switch (firstComponents[jj])
+                                    //Содержит ли клетка в себе один из элементов модели
+                                    if (cells[z].Contains(firstComponents[jj], System.StringComparison.CurrentCultureIgnoreCase))
                                     {
-                                        case "Факультет": file.faculty = cells[z]; break;//Тут должны быть ещё проверки для имени
-
-                                        case "Форма обучения": file.formOfEdu = cells[z]; break;
-
-                                        case "курс": file.cource = cells[z]; break;
-
-                                        case "неделя": file.weekId = cells[z]; break;
-
-                                        default: Console.WriteLine("NULL"); break;
-                                    }
-                                    break;
-                                }
-
-                                if (!String.IsNullOrEmpty(file.faculty) && !String.IsNullOrEmpty(file.formOfEdu) && !String.IsNullOrEmpty(file.cource) && !String.IsNullOrEmpty(file.weekId))
-                                {
-                                    isFCFull = true;
-                                }
-                            }
-
-                        }
-                        else
-                        {
-
-                            if (!(isGroupsFull == true) && !String.Compare(cells[z], "").Equals(0) && !String.Compare(cells[z], "</cell>").Equals(0) && !String.Compare(cells[z], "</cell></row>").Equals(0))
-                            {
-
-                                string[] groupNames = new string[cells.Length - z + 1];
-                                file.group = new Group[cells.Length - z + 1];
-
-                                for (int curRow = 0; curRow < cells.Length - z; curRow++)
-                                {
-                                    groupNames[curRow] = cells[z + curRow];
-                                    file.group[curRow] = new Group()
-                                    {
-                                        groupName = groupNames[curRow] // Тут удалить row и cell
-                                    };
-
-
-                                    Console.WriteLine($"///////////////////////{groupNames[curRow]}");
-
-                                    //Заполнение групп
-                                    bool is1DayFound = false;
-                                    // Console.WriteLine($"}}}}}}}}}}}}}}}}}}}}}} ЭТО {j+1} СТРОКА ИЗ {rows.Length}");
-                                    for (int remRows = 1; remRows < rows.Length - j; remRows++)
-                                    {
-
-                                        string[] cellsInRemRows = rows[j + remRows].Split("<cell>");
-
-                                        //Поиск 1 упоминания понедельнака
-                                        if (is1DayFound == false)
+                                        //какой элемент модели она содержит
+                                        switch (firstComponents[jj])
                                         {
-                                            for (int cellInCurRightRow = 0; cellInCurRightRow < cellsInRemRows.Length; cellInCurRightRow++)
+                                            case "Факультет": file.faculty = cells[z]; break;//Тут должны быть ещё проверки для имени
+
+                                            case "Форма обучения": file.formOfEdu = cells[z]; break;
+
+                                            case "курс": if (isCourceFind == false) { file.cource = cells[z]; isCourceFind = true; } break;
+
+                                            case "неделя": file.weekId = cells[z]; break;
+
+                                            default: Console.WriteLine("NULL"); break;
+                                        }
+                                        break;
+                                    }
+
+                                    if (!String.IsNullOrEmpty(file.faculty) && !String.IsNullOrEmpty(file.formOfEdu) && !String.IsNullOrEmpty(file.cource) && !String.IsNullOrEmpty(file.weekId))
+                                    {
+                                        isFCFull = true;
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+
+                                if (!(isGroupsFull == true) && !String.Compare(cells[z], "").Equals(0) && !String.Compare(cells[z], "</cell>").Equals(0) && !String.Compare(cells[z], "</cell></row>").Equals(0))
+                                {
+
+                                    string[] groupNames = new string[cells.Length - z + 1];
+                                    //file.group = new Group[cells.Length - z + 1];
+                                    Group Lgroup = new Group();
+
+                                    for (int curRow = 0; curRow < cells.Length - z; curRow++)
+                                    {
+                                        groupNames[curRow] = cells[z + curRow];
+                                        Group _groupInList = new Group()
+                                        {
+                                            groupName = groupNames[curRow] // Тут удалить row и cell
+                                        };
+                                        _groups.Add(_groupInList);
+
+
+
+                                        Console.WriteLine($"///////////////////////{groupNames[curRow]}");
+
+                                        //Заполнение групп
+                                        bool is1DayFound = false;
+                                        // Console.WriteLine($"}}}}}}}}}}}}}}}}}}}}}} ЭТО {j+1} СТРОКА ИЗ {rows.Length}");
+                                        for (int remRows = 1; remRows < rows.Length - j; remRows++)
+                                        {
+
+                                            string[] cellsInRemRows = rows[j + remRows].Split("<cell>");
+
+                                            //Поиск 1 упоминания понедельнака
+                                            if (is1DayFound == false)
+                                            {
+                                                for (int cellInCurRightRow = 0; cellInCurRightRow < cellsInRemRows.Length; cellInCurRightRow++)
+                                                {
+
+
+                                                    string[] daysOfTheWeek = new string[] { "понедельник", "вторник", "среда", "четверг", "пятница" };
+
+                                                    for (int dotw = 0; dotw < daysOfTheWeek.Length; dotw++)
+                                                    {
+
+                                                        if (cellsInRemRows[cellInCurRightRow].Contains(daysOfTheWeek[dotw], System.StringComparison.CurrentCultureIgnoreCase))
+                                                        {
+                                                            Console.WriteLine($"|||||||||||||||| OOO {cellsInRemRows[cellInCurRightRow]}");
+
+                                                            DayOfWeek fileDay = new DayOfWeek()
+                                                            {
+                                                                dayName = cellsInRemRows[cellInCurRightRow],
+                                                                date = cellsInRemRows[cellInCurRightRow + 1]
+
+                                                            };
+                                                            _weekdays.Add(fileDay);
+                                                            if (_weekdays.Count == daysOfTheWeek.Length)
+                                                            {
+                                                                _listOfWeekDays.Add(_weekdays);
+                                                                _weekdays = new List<DayOfWeek>();
+                                                            }
+
+                                                            int curDayRows = 0;
+
+                                                            for (int howMushRowsToNextDay = 1; howMushRowsToNextDay < rows.Length - j - remRows; howMushRowsToNextDay++)
+                                                            {
+                                                                string[] mesh = rows[j + remRows + howMushRowsToNextDay].Split("<cell>");
+
+                                                                for (int dotw2 = 0; dotw2 < daysOfTheWeek.Length; dotw2++)
+                                                                {
+                                                                    if (!daysOfTheWeek[dotw].Equals("пятница") && mesh[cellInCurRightRow].Contains(daysOfTheWeek[dotw2], System.StringComparison.CurrentCultureIgnoreCase))
+                                                                    {
+                                                                        curDayRows = howMushRowsToNextDay;
+
+                                                                        break;
+                                                                    }
+                                                                    else if (daysOfTheWeek[dotw].Equals("пятница") || howMushRowsToNextDay == rows.Length - j - remRows - 1)  //переделать под все дни
+                                                                    {
+                                                                        curDayRows = rows.Length - j - remRows;
+
+                                                                        break;
+                                                                    }
+                                                                }//Console.WriteLine(mesh[cellInCurRightRow]); 
+                                                                if (curDayRows != 0) break;
+                                                            }
+
+                                                            for (int para = 0; para < curDayRows; para++)
+                                                            {
+                                                                string[] mesh = rows[j + remRows + para].Split("<cell>");
+                                                                //int bgr = 0;
+
+                                                                /*for(int biggestRow = 0; biggestRow < curDayRows; biggestRow++)
+                                                                {
+                                                                    string[] probBiggest = rows[j + remRows + biggestRow].Split("<cell>");//мб не очень
+                                                                    if (probBiggest.Length > rows[j + remRows].Split("<cell>").Length)
+                                                                    {
+                                                                        bgr = biggestRow;
+                                                                    }
+                                                                }*/
+
+                                                                string[] meshPlusOne = rows[j + remRows].Split("<cell>");
+
+                                                                if (mesh.Length < meshPlusOne.Length)
+                                                                {
+                                                                    // meshPlusOne = new string[rows[j + remRows + para + 1].Split("<cell>").Length];
+                                                                    bool isFour = false;
+                                                                    for (int _cells = 0; _cells < meshPlusOne.Length - 1; _cells++)
+                                                                    {
+
+                                                                        if (isFour != true && _cells < 4)
+                                                                        {
+
+                                                                            meshPlusOne[_cells] = mesh[_cells];
+
+                                                                        }
+                                                                        else if (_cells == 4)
+                                                                        {
+
+                                                                            meshPlusOne[_cells] = "";//в самый первый раз стирается значение, надо двигать
+
+                                                                            isFour = true;
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            meshPlusOne[_cells] = mesh[meshPlusOne.Length - _cells];
+                                                                        }
+
+                                                                    }
+                                                                    if (4 + curRow >= meshPlusOne.Length)
+                                                                    {
+                                                                        Console.WriteLine("{0} {1}  --- MPO - b", meshPlusOne[3], meshPlusOne[4 + curRow - ((4 + curRow - mesh.Length + 1))]);
+                                                                        if ((para + 1) % 2 != 0)
+                                                                        {
+                                                                            //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+
+                                                                            Couples lCouples = new Couples()
+                                                                            {
+                                                                                time = meshPlusOne[3],
+                                                                                discipline = meshPlusOne[4 + curRow - ((4 + curRow - mesh.Length + 1))]
+                                                                            };
+
+                                                                            _couples.Add(lCouples);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            _couples[para / 2].otherInfo = meshPlusOne[4 + curRow - ((4 + curRow - mesh.Length + 1))];
+
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        Console.WriteLine("{0} {1}  --- MPO -g", meshPlusOne[3], meshPlusOne[4 + curRow]);
+                                                                        if ((para + 1) % 2 != 0)
+                                                                        {
+                                                                            //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+
+                                                                            Couples lCouples = new Couples()
+                                                                            {
+                                                                                time = meshPlusOne[3],
+                                                                                discipline = meshPlusOne[4 + curRow]
+                                                                            };
+
+                                                                            _couples.Add(lCouples);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            _couples[para / 2].otherInfo = meshPlusOne[4 + curRow];
+
+                                                                        }
+
+                                                                    }
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (4 + curRow >= mesh.Length)
+                                                                    {
+
+                                                                        Console.WriteLine("{0} {1} - b", mesh[3], mesh[4 + curRow - (4 + curRow - mesh.Length + 1)]);
+                                                                        if ((para + 1) % 2 != 0)
+                                                                        {
+                                                                            //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+
+                                                                            Couples lCouples = new Couples()
+                                                                            {
+                                                                                time = mesh[3],
+                                                                                discipline = mesh[4 + curRow - ((4 + curRow - mesh.Length + 1))]
+                                                                            };
+
+                                                                            _couples.Add(lCouples);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            _couples[para / 2].otherInfo = mesh[4 + curRow - ((4 + curRow - mesh.Length + 1))];
+
+                                                                        }
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        Console.WriteLine("{0} {1} -g", mesh[3], mesh[4 + curRow]);
+                                                                        if ((para + 1) % 2 != 0)
+                                                                        {
+                                                                            //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+
+                                                                            Couples lCouples = new Couples()
+                                                                            {
+                                                                                time = mesh[3],
+                                                                                discipline = mesh[4 + curRow]
+                                                                            };
+
+                                                                            _couples.Add(lCouples);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            _couples[para / 2].otherInfo = mesh[4 + curRow];
+
+                                                                        }
+
+                                                                    }
+
+
+                                                                }
+
+
+
+                                                            }
+
+
+                                                            if (_couples.Count == curDayRows / 2)
+                                                            {
+                                                                _listOfCouples.Add(_couples);
+                                                                _couples = new List<Couples>();
+                                                            }
+
+                                                            Console.WriteLine($"llllllllllllllllllllllllДоступно строк {curDayRows}");
+                                                            //запись дня недели
+                                                            //is1DayFound = true;
+
+                                                        }
+
+
+
+                                                    }
+
+
+                                                    if (cellsInRemRows[cellInCurRightRow].Contains("пятница", System.StringComparison.CurrentCultureIgnoreCase))
+                                                    {
+                                                        _listOfListOfCouples.Add(_listOfCouples);
+                                                        _listOfCouples = new List<List<Couples>>();
+                                                    }
+                                                }
+                                            }
+
+                                            if (is1DayFound == true)
                                             {
 
 
-                                                string[] daysOfTheWeek = new string[] { "понедельник", "вторник", "среда", "четверг", "пятница" };
 
-                                                for (int dotw = 0; dotw < daysOfTheWeek.Length; dotw++)
-                                                {
-
-                                                    if (cellsInRemRows[cellInCurRightRow].Contains(daysOfTheWeek[dotw], System.StringComparison.CurrentCultureIgnoreCase))
-                                                    {
-                                                        Console.WriteLine($"|||||||||||||||| OOO {cellsInRemRows[cellInCurRightRow]}");
-
-                                                        DayOfWeek fileDay = new DayOfWeek() 
-                                                        { 
-                                                            dayName = cellsInRemRows[cellInCurRightRow],
-                                                            date = cellsInRemRows[cellInCurRightRow + 1]
-
-                                                        };
-                                                        _weekdays.Add(fileDay);
-                                                        if(_weekdays.Count == daysOfTheWeek.Length)
-                                                        {
-                                                            _listOfWeekDays.Add(_weekdays);
-                                                            _weekdays = new List<DayOfWeek>();
-                                                        }
-
-                                                        int curDayRows = 0;
-
-                                                        for (int howMushRowsToNextDay = 1; howMushRowsToNextDay < rows.Length - j - remRows; howMushRowsToNextDay++)
-                                                        {//ПОЧИНИ ПЯТНИЦУ 
-                                                            string[] mesh = rows[j + remRows + howMushRowsToNextDay].Split("<cell>");
-
-                                                            for (int dotw2 = 0; dotw2 < daysOfTheWeek.Length; dotw2++)
-                                                            {
-                                                                if (!daysOfTheWeek[dotw].Equals("пятница") && mesh[cellInCurRightRow].Contains(daysOfTheWeek[dotw2], System.StringComparison.CurrentCultureIgnoreCase))
-                                                                {
-                                                                    curDayRows = howMushRowsToNextDay;
-
-                                                                    break;
-                                                                }
-                                                                if (daysOfTheWeek[dotw].Equals("пятница"))//переделать под все дни
-                                                                {
-                                                                    curDayRows = rows.Length - j - remRows;
-
-                                                                    break;
-                                                                }
-                                                            }//Console.WriteLine(mesh[cellInCurRightRow]); 
-                                                            if (curDayRows != 0) break;
-                                                        }
-
-                                                        for (int para = 0; para < curDayRows; para++)
-                                                        {
-                                                            string[] mesh = rows[j + remRows + para].Split("<cell>");
-                                                            //int bgr = 0;
-
-                                                            /*for(int biggestRow = 0; biggestRow < curDayRows; biggestRow++)
-                                                            {
-                                                                string[] probBiggest = rows[j + remRows + biggestRow].Split("<cell>");//мб не очень
-                                                                if (probBiggest.Length > rows[j + remRows].Split("<cell>").Length)
-                                                                {
-                                                                    bgr = biggestRow;
-                                                                }
-                                                            }*/
-
-                                                            string[] meshPlusOne = rows[j + remRows].Split("<cell>");
-
-                                                            if (mesh.Length < meshPlusOne.Length)
-                                                            {
-                                                                // meshPlusOne = new string[rows[j + remRows + para + 1].Split("<cell>").Length];
-                                                                bool isFour = false;
-                                                                for (int _cells = 0; _cells < meshPlusOne.Length - 1; _cells++)
-                                                                {
-                                                                    if (isFour != true && _cells < 4)
-                                                                    {
-
-                                                                        meshPlusOne[_cells] = mesh[_cells];
-
-                                                                    }
-                                                                    else if (_cells == 4)
-                                                                    {
-                                                                        meshPlusOne[_cells] = "";
-                                                                        isFour = true;
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        meshPlusOne[_cells] = mesh[meshPlusOne.Length - 1 - _cells];
-                                                                    }
-
-                                                                }
-                                                                if (4 + curRow >= meshPlusOne.Length)
-                                                                {
-                                                                    Console.WriteLine("{0} {1}  --- MPO - b", meshPlusOne[3], meshPlusOne[4 + curRow - ((4 + curRow - mesh.Length + 1))]);
-                                                                    if ((para + 1) % 2 != 0)
-                                                                    {
-                                                                        //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
-
-                                                                        Couples lCouples = new Couples()
-                                                                        {
-                                                                            time = meshPlusOne[3],
-                                                                            discipline = meshPlusOne[4 + curRow - ((4 + curRow - mesh.Length + 1))]
-                                                                        };
-
-                                                                        _couples.Add(lCouples);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        _couples[para  / 2].otherInfo = meshPlusOne[4 + curRow - ((4 + curRow - mesh.Length + 1))];
-                                                                        
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    Console.WriteLine("{0} {1}  --- MPO -g", meshPlusOne[3], meshPlusOne[4 + curRow]);
-                                                                    if ((para + 1) % 2 != 0)
-                                                                    {
-                                                                        //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
-
-                                                                        Couples lCouples = new Couples()
-                                                                        {
-                                                                            time = meshPlusOne[3],
-                                                                            discipline = meshPlusOne[4 + curRow]
-                                                                        };
-
-                                                                        _couples.Add(lCouples);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        _couples[para / 2].otherInfo = meshPlusOne[4 + curRow];
-
-                                                                    }
-
-                                                                }
-
-                                                            }
-                                                            else
-                                                            {
-                                                                if (4 + curRow >= mesh.Length)
-                                                                {
-
-                                                                    Console.WriteLine("{0} {1} - b", mesh[3], mesh[4 + curRow - (4 + curRow - mesh.Length + 1)]);
-                                                                    if ((para + 1) % 2 != 0)
-                                                                    {
-                                                                        //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
-
-                                                                        Couples lCouples = new Couples()
-                                                                        {
-                                                                            time = mesh[3],
-                                                                            discipline = mesh[4 + curRow - ((4 + curRow - mesh.Length + 1))]
-                                                                        };
-
-                                                                        _couples.Add(lCouples);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        _couples[para / 2].otherInfo = mesh[4 + curRow - ((4 + curRow - mesh.Length + 1))];
-
-                                                                    }
-
-                                                                }
-                                                                else
-                                                                {
-                                                                    Console.WriteLine("{0} {1} -g", mesh[3], mesh[4 + curRow]);
-                                                                    if ((para + 1) % 2 != 0)
-                                                                    {
-                                                                        //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
-
-                                                                        Couples lCouples = new Couples()
-                                                                        {
-                                                                            time = mesh[3],
-                                                                            discipline = mesh[4 + curRow]
-                                                                        };
-
-                                                                        _couples.Add(lCouples);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        _couples[para / 2].otherInfo = mesh[4 + curRow];
-
-                                                                    }
-
-                                                                }
-
-
-                                                            }
-
-                                                           
-
-                                                        }
-
-
-                                                        if (_couples.Count == curDayRows / 2)
-                                                        {
-                                                            _listOfCouples.Add(_couples);
-                                                            _couples = new List<Couples>();
-                                                        }
-
-                                                        Console.WriteLine($"llllllllllllllllllllllllДоступно строк {curDayRows}");
-                                                        //запись дня недели
-                                                        //is1DayFound = true;
-                                                    }
-                                                }
-
-                                                if (cellsInRemRows[cellInCurRightRow].Contains("пятница", System.StringComparison.CurrentCultureIgnoreCase))
-                                                {
-                                                    _listOfListOfCouples.Add(_listOfCouples);
-                                                    _listOfCouples = new List<List<Couples>>();
-                                                }
                                             }
-                                        }
-
-                                        if (is1DayFound == true)
-                                        {
+                                            else Console.WriteLine("||||");
 
 
 
                                         }
-                                        else Console.WriteLine("||||");
-
 
 
                                     }
 
 
+
+
+                                    isGroupsFull = true;
+
                                 }
 
-
-
-
-                                isGroupsFull = true;
 
                             }
 
 
+
+
+
+
+                            Console.WriteLine(cells[z]);
+
                         }
-
-
-                        
-
-
-
-                        //Console.WriteLine(cells[z]);
-
                     }
-                }
+               /* if(iow == 0)
+                    {
+                        continue;
+                    }*/
+
                 _mrasp.Add(file);
 
 
@@ -408,60 +424,129 @@ namespace RaspFactory.Parser
 
                 //for (int jopa = 0; jopa < file.group.Length - 1; jopa++) Console.WriteLine(file.group[jopa].groupName);
                 Console.WriteLine(_mrasp.Count);
-                //Тут сериализация
+                    //Тут сериализация
 
-                for (int Jfiles = 0; Jfiles < _mrasp.Count; Jfiles++) 
-                {
-                    MRaspisanie json = new MRaspisanie()
+                    for (int Jfiles = 0; Jfiles < _mrasp.Count; Jfiles++)
                     {
-                        faculty = _mrasp[Jfiles].faculty,
-                        formOfEdu = _mrasp[Jfiles].formOfEdu,
-                        cource = _mrasp[Jfiles].cource,
-                        weekId = _mrasp[Jfiles].weekId,
-                        group = _mrasp[Jfiles].group
-                    };
-
-                    for(int Jgroups = 0; Jgroups < _mrasp[Jfiles].group.Length -1; Jgroups++)
-                    {
-                        json.group[Jgroups].groupName = _mrasp[Jfiles].group[Jgroups].groupName;
-                        json.group[Jgroups].week = new DayOfWeek[_listOfWeekDays.Count];
-
-
-
-                        for(int Jweeks = 0; Jweeks < _mrasp[Jfiles].group[Jgroups].week.Length; Jweeks ++)
+                        MRaspisanie json = new MRaspisanie()
                         {
-                            var inLgroups = _listOfWeekDays[Jweeks];
-                            json.group[Jgroups].week[Jweeks] = new DayOfWeek();
-                            json.group[Jgroups].week[Jweeks].dayName = inLgroups[Jweeks].dayName;
-                            json.group[Jgroups].week[Jweeks].date = inLgroups[Jweeks].date;
+                            faculty = _mrasp[Jfiles].faculty.Remove(_mrasp[Jfiles].faculty.IndexOf("<")),
+                            formOfEdu = _mrasp[Jfiles].formOfEdu.Remove(_mrasp[Jfiles].formOfEdu.IndexOf("<")),
+                            cource = _mrasp[Jfiles].cource/*.Remove(_mrasp[Jfiles].cource.IndexOf(""))*/,
+                            weekId = _mrasp[Jfiles].weekId.Remove(_mrasp[Jfiles].weekId.IndexOf("<")),
+                            group = _mrasp[Jfiles].group
+                        };
+                        json.group = new Group[_groups.Count];
 
-                            var index1 = _listOfListOfCouples[Jgroups];
-                            var index2 = index1[Jweeks];
-                            json.group[Jgroups].week[Jweeks].couples = new Couples[index2.Count];
-
-                            for(int Jcouples = 0; Jcouples < index2.Count; Jcouples++)
+                        for (int Jgroups = 0; Jgroups < _groups.Count; Jgroups++)
+                        {
+                            json.group[Jgroups] = new Group()
                             {
-                                json.group[Jgroups].week[Jweeks].couples[Jcouples] = new Couples();
+                                groupName = _groups[Jgroups].groupName.Remove(_groups[Jgroups].groupName.IndexOf("<"))
+                            };
 
-                                json.group[Jgroups].week[Jweeks].couples[Jcouples].time = index2[Jcouples].time;
-                                json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = index2[Jcouples].discipline;
-                                json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = index2[Jcouples].otherInfo;
+                            var _curDays = new List<DayOfWeek>();
+
+                            if (_listOfWeekDays.Count != 0)
+                            {
+                                _curDays = _listOfWeekDays[Jgroups];
+                            }
+                            else
+                            {
+                                _curDays = _weekdays;
+                            }
+
+                            json.group[Jgroups].week = new DayOfWeek[_curDays.Count];
+
+                            for (int Jweeks = 0; Jweeks < _curDays.Count; Jweeks++)
+                            {
+                                json.group[Jgroups].week[Jweeks] = new DayOfWeek
+                                {
+                                    dayName = _curDays[Jweeks].dayName.Remove(_curDays[Jweeks].dayName.IndexOf("<")),
+                                    date = OADateToDate.ToDate(_curDays[Jweeks].date.Remove(_curDays[Jweeks].date.IndexOf("<")))
+                                };
+
+                                var index1 = new List<List<Couples>>();
+                                if (_listOfListOfCouples.Count == 0)
+                                {
+                                    index1 = _listOfCouples;
+                                }
+                                else
+                                {
+                                    index1 = _listOfListOfCouples[Jgroups];
+                                }
+                                var index2 = index1[Jweeks];
+
+
+                                json.group[Jgroups].week[Jweeks].couples = new Couples[index1[Jweeks].Count];
+
+                                for (int Jcouples = 0; Jcouples < index1[Jweeks].Count; Jcouples++)
+                                {
+                                    json.group[Jgroups].week[Jweeks].couples[Jcouples] = new Couples
+                                    {
+                                        time = index2[Jcouples].time.Remove(index2[Jcouples].time.IndexOf("<"))
+                                    };
+
+                                    if (index2[Jcouples].discipline.Contains("<"))
+                                    {
+                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = index2[Jcouples].discipline.Remove(index2[Jcouples].discipline.IndexOf("<"));
+                                    }
+                                    else
+                                    {
+                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = index2[Jcouples].discipline;
+                                    }
+
+                                    if (index2[Jcouples].otherInfo.Contains("<"))
+                                    {
+                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = index2[Jcouples].otherInfo.Remove(index2[Jcouples].otherInfo.IndexOf("<"));
+                                    }
+                                    else
+                                    {
+                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = index2[Jcouples].otherInfo;
+                                    }
+
+                                }
 
                             }
 
+
+
+
                         }
 
+                        int facultyIndex = 0;
+                        int formOfEduIndex = 0;
+                        int courceIndex = 0;
+                        int weekIndex = 0;
+
+                        for (int f = 0; f < Config.faculties.Length; f++)
+                        {
+                            if (json.faculty.Contains(Config.faculties[f]))
+                                facultyIndex = f + 1;
+                        }
+
+                        for (int f = 0; f < Config.formOfEdu.Length; f++)
+                        {
+                            if (json.formOfEdu.Contains(Config.formOfEdu[f]))
+                                formOfEduIndex = f + 1;
+                        }
+
+                        for (int c = 0; c < Config.cource.Length; c++)
+                        {
+                            if (json.cource.Contains(Config.cource[c]))
+                                courceIndex = c + 1;
+                        }
+
+                        weekIndex = Convert.ToInt32(json.weekId.FirstOrDefault().ToString());
 
 
 
+                        JsonConvert.SerializeObject(json);
+                        File.Create($"{pathToEndFiles}\\Data{facultyIndex}{formOfEduIndex}{courceIndex}{weekIndex}.json").Close();
+                        File.WriteAllText($"{pathToEndFiles}\\Data{facultyIndex}{formOfEduIndex}{courceIndex}{weekIndex}.json", JsonConvert.SerializeObject(json));
+                        //findex += 1;
                     }
-
-                    JsonConvert.SerializeObject(json);
-                    File.Create($"P:/ITheM/Documents/TESTJSON/DATA{findex}.json").Close();
-                    File.WriteAllText($"P:/ITheM/Documents/TESTJSON/DATA{findex}.json", JsonConvert.SerializeObject(json));
-                    findex += 1;
-
-                }
+               /* }*/
 
 
 

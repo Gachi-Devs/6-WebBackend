@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RaspFactory
+namespace RaspFactory.Converter
 {
     public class XlsToXlsx2
     {

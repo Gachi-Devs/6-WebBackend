@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {}
+    "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {}
   },
   "projects": {
-    "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {
+    "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
+        "projectUniqueName": "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
         "projectName": "RaspFactory",
-        "projectPath": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
+        "projectPath": "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
         "packagesPath": "C:\\Users\\ITheM\\.nuget\\packages\\",
-        "outputPath": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\obj\\",
+        "outputPath": "R:\\Документы\\JetBrains_C#\\RaspFactory\\RaspFactory\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "R:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -46,9 +46,25 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Aspose.Cells": {
+              "target": "Package",
+              "version": "[21.10.0, )"
+            },
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[2.13.1, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.5.4, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "Spire.XLS": {
+              "target": "Package",
+              "version": "[11.10.4, )"
             }
           },
           "imports": [
