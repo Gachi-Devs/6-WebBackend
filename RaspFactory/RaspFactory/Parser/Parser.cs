@@ -62,7 +62,7 @@ namespace RaspFactory.Parser
             {
 
                 
-                var _mrasp = new List<MRaspisanie>();
+              /*  var _mrasp = new List<MRaspisanie>();
                 var _groups = new List<Group>();
                 var _weekdays = new List<DayOfWeek>();
                 var _listOfWeekDays = new List<List<DayOfWeek>>();
@@ -74,14 +74,47 @@ namespace RaspFactory.Parser
                // string fileName = "DATA";//Сделать id файла
                 bool isFCFull = false;
                 bool isGroupsFull = false;
-                bool isCourceFind = false;
+                bool isCourceFind = false;*/
 
 
 
-                string[] indexOfWeek = sheet[i].Split("<cell>День недели");
+                string[] meshIndexOfWeek = sheet[i].Split("<cell>День недели");
+
+                string[] indexOfWeek = new string[meshIndexOfWeek.Length];
+                for(int miow = 0; miow < indexOfWeek.Length; miow++)
+                {
+                    if(miow == 0 || miow == indexOfWeek.Length - 1)
+                    {
+                        indexOfWeek[miow] = meshIndexOfWeek[miow];
+                        continue;
+                    }
+                    indexOfWeek[miow] = meshIndexOfWeek[miow].Remove(meshIndexOfWeek[miow].LastIndexOf("</row><row>"));
+                }
+
+
                 for (int iow = 1; iow < indexOfWeek.Length; iow++)
                 {
-                    
+
+
+
+                    var _mrasp = new List<MRaspisanie>();
+                    var _groups = new List<Group>();
+                    var _weekdays = new List<DayOfWeek>();
+                    var _listOfWeekDays = new List<List<DayOfWeek>>();
+                    var _couples = new List<Couples>();
+                    var _listOfCouples = new List<List<Couples>>();
+                    var _listOfListOfCouples = new List<List<List<Couples>>>();
+
+                    MRaspisanie file = new MRaspisanie();
+                    // string fileName = "DATA";//Сделать id файла
+                    bool isFCFull = false;
+                    bool isGroupsFull = false;
+                    bool isCourceFind = false;
+
+
+
+
+
                     string infoConcatWithWeek = indexOfWeek[0] + indexOfWeek[iow];
 
                     string[] rows = infoConcatWithWeek.Split("<row>");
@@ -140,13 +173,25 @@ namespace RaspFactory.Parser
                                         groupNames[curRow] = cells[z + curRow];
                                         Group _groupInList = new Group()
                                         {
-                                            groupName = groupNames[curRow] // Тут удалить row и cell
+                                            groupName = groupNames[curRow]
                                         };
                                         _groups.Add(_groupInList);
 
 
 
                                         Console.WriteLine($"///////////////////////{groupNames[curRow]}");
+
+                                        string[] daysOfTheWeek = new string[] { "понедельник", "вторник", "среда", "четверг", "пятница" };
+
+                                        int workDaysInCurWeek = 0;
+
+                                        for(int dayCount = 0; dayCount < daysOfTheWeek.Length; dayCount++)
+                                        {
+                                            if (indexOfWeek[iow].Contains(daysOfTheWeek[dayCount]))
+                                            {
+                                                workDaysInCurWeek += 1;
+                                            }
+                                        }
 
                                         //Заполнение групп
                                         bool is1DayFound = false;
@@ -160,10 +205,7 @@ namespace RaspFactory.Parser
                                             if (is1DayFound == false)
                                             {
                                                 for (int cellInCurRightRow = 0; cellInCurRightRow < cellsInRemRows.Length; cellInCurRightRow++)
-                                                {
-
-
-                                                    string[] daysOfTheWeek = new string[] { "понедельник", "вторник", "среда", "четверг", "пятница" };
+                                                {                                      
 
                                                     for (int dotw = 0; dotw < daysOfTheWeek.Length; dotw++)
                                                     {
@@ -179,7 +221,7 @@ namespace RaspFactory.Parser
 
                                                             };
                                                             _weekdays.Add(fileDay);
-                                                            if (_weekdays.Count == daysOfTheWeek.Length)
+                                                            if (_weekdays.Count == daysOfTheWeek.Length || _weekdays.Count == workDaysInCurWeek)//скорее всего пробелма тут
                                                             {
                                                                 _listOfWeekDays.Add(_weekdays);
                                                                 _weekdays = new List<DayOfWeek>();
