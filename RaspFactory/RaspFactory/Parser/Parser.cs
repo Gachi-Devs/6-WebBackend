@@ -18,7 +18,7 @@ namespace RaspFactory.Parser
         public void Pars()
         {
             string xmlFile = "";
-            string path = "P:\\ITheM\\Documents\\TESTJSON\\1.xml";
+            string path = "P:\\ITheM\\Documents\\TESTJSON\\XML.xml";
             String line;
             try
             {
@@ -579,7 +579,7 @@ namespace RaspFactory.Parser
                                 courceIndex = c + 1;
                         }
 
-                        weekIndex = Convert.ToInt32(json.weekId.FirstOrDefault().ToString());
+                        weekIndex = Convert.ToInt32(json.weekId.Remove(json.weekId.IndexOf(" ")));
 
 
 
