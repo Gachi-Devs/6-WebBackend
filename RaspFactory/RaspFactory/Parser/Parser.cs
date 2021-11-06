@@ -18,7 +18,7 @@ namespace RaspFactory.Parser
         public void Pars()
         {
             string xmlFile = "";
-            string path = "P:\\ITheM\\Documents\\TESTJSON\\XML.xml";
+            string path = "P:\\ITheM\\Documents\\TESTJSON\\1.xml";
             String line;
             try
             {
@@ -90,13 +90,13 @@ namespace RaspFactory.Parser
                     }
                     indexOfWeek[miow] = meshIndexOfWeek[miow].Remove(meshIndexOfWeek[miow].LastIndexOf("</row><row>"));
                 }
-
+                
 
                 for (int iow = 1; iow < indexOfWeek.Length; iow++)
                 {
 
 
-
+                    
                     var _mrasp = new List<MRaspisanie>();
                     var _groups = new List<Group>();
                     var _weekdays = new List<DayOfWeek>();
@@ -411,7 +411,7 @@ namespace RaspFactory.Parser
                                                     }
 
 
-                                                    if (cellsInRemRows[cellInCurRightRow].Contains("пятница", System.StringComparison.CurrentCultureIgnoreCase))
+                                                    if (cellsInRemRows[cellInCurRightRow].Contains("пятница", System.StringComparison.CurrentCultureIgnoreCase) || _listOfCouples.Count == workDaysInCurWeek)
                                                     {
                                                         _listOfListOfCouples.Add(_listOfCouples);
                                                         _listOfCouples = new List<List<Couples>>();
