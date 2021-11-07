@@ -264,7 +264,7 @@ namespace RaspFactory.Parser
                                                                     //Необходимо отрехать от строки с группами всё лишнее в конце, посчитать целлы и создать мэшплюсодин, длинна которого будет длинной массива групп
                                                                     int meshPlusOneIndex = 0;
                                                                     string[] primeGroupRow = rows[rowWithGroups].Split("<cell>"); ;
-                                                                    for(int mpoi = 3; mpoi < primeGroupRow.Length; mpoi++)
+                                                                    for(int mpoi = 4; mpoi < primeGroupRow.Length; mpoi++)
                                                                     {
                                                                         if (primeGroupRow[mpoi].Contains("</cell>"))
                                                                         {
@@ -288,21 +288,34 @@ namespace RaspFactory.Parser
                                                                             }
                                                                         }
 
-                                                                        meshPlusOneIndex = mpoi;
+                                                                        meshPlusOneIndex = mpoi+1;
                                                                     }
+                                                                   
 
                                                                     string[] meshPlusOne = new string[meshPlusOneIndex];
                                                                     for(int fillmpo = 0; fillmpo < meshPlusOne.Length; fillmpo++)
                                                                     {
-                                                                        meshPlusOne[fillmpo] = primeGroupRow[fillmpo];
+                                                                        meshPlusOne[fillmpo] = meshPlusOne[fillmpo];
                                                                     }
                                                                         
+                                                                    //Нужно сделать что то похожее на код выше, тк строка в файле 11310 в среде 13:45 некорректно отображается, видимо mesh якобы больше и ему не добавляется пустаяячейка
+                                                                    //а я уже сделал это на строке ниже спасибо
+                                                                    if(mesh.Length >= meshPlusOne.Length && mesh.Length < primeGroupRow.Length)
+                                                                    {
+                                                                        mesh = new string[primeGroupRow.Length - (primeGroupRow.Length - meshPlusOneIndex)];
+                                                                        string[] oldMesh = rows[j + remRows + para].Split("<cell>");
+
+                                                                        for (int meshindex = 0; meshindex < primeGroupRow.Length -(primeGroupRow.Length - meshPlusOneIndex); meshindex++)
+                                                                        {
+                                                                            mesh[meshindex] = oldMesh[meshindex];
+                                                                        }
+                                                                    }
 
                                                                     if (mesh.Length < meshPlusOne.Length)
                                                                     {
                                                                         // meshPlusOne = new string[rows[j + remRows + para + 1].Split("<cell>").Length];
                                                                         bool isFour = false;
-                                                                        for (int _cells = 0; _cells < meshPlusOne.Length - 1; _cells++)
+                                                                        for (int _cells = 0; _cells < meshPlusOne.Length-1; _cells++)
                                                                         {
 
                                                                             if (isFour != true && _cells < 4)
@@ -320,7 +333,7 @@ namespace RaspFactory.Parser
                                                                             }
                                                                             else
                                                                             {
-                                                                                meshPlusOne[_cells] = mesh[meshPlusOne.Length - _cells];
+                                                                                meshPlusOne[_cells] = mesh[_cells - 1];
                                                                             }
 
                                                                         }
@@ -560,24 +573,31 @@ namespace RaspFactory.Parser
                                         time = index2[Jcouples].time.Remove(index2[Jcouples].time.IndexOf("<"))
                                     };
 
-                                    if (index2[Jcouples].discipline.Contains("<"))
+                                    if (index2[Jcouples].discipline != null)
                                     {
-                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = index2[Jcouples].discipline.Remove(index2[Jcouples].discipline.IndexOf("<"));
+                                        if (index2[Jcouples].discipline.Contains("<"))
+                                        {
+                                            json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = index2[Jcouples].discipline.Remove(index2[Jcouples].discipline.IndexOf("<"));
+                                        }
+                                        else
+                                        {
+                                            json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = index2[Jcouples].discipline;
+                                        }
                                     }
-                                    else
-                                    {
-                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = index2[Jcouples].discipline;
-                                    }
+                                    else json.group[Jgroups].week[Jweeks].couples[Jcouples].discipline = "";
 
-                                    if (index2[Jcouples].otherInfo.Contains("<"))
+                                    if (index2[Jcouples].otherInfo != null)
                                     {
-                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = index2[Jcouples].otherInfo.Remove(index2[Jcouples].otherInfo.IndexOf("<"));
+                                        if (index2[Jcouples].otherInfo.Contains("<"))
+                                        {
+                                            json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = index2[Jcouples].otherInfo.Remove(index2[Jcouples].otherInfo.IndexOf("<"));
+                                        }
+                                        else
+                                        {
+                                            json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = index2[Jcouples].otherInfo;
+                                        }
                                     }
-                                    else
-                                    {
-                                        json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = index2[Jcouples].otherInfo;
-                                    }
-
+                                    else json.group[Jgroups].week[Jweeks].couples[Jcouples].otherInfo = "";
                                 }
 
                             }
