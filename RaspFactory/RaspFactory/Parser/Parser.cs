@@ -164,7 +164,7 @@ namespace RaspFactory.Parser
                                 if (!(isGroupsFull == true) && !String.Compare(cells[z], "").Equals(0) && !String.Compare(cells[z], "</cell>").Equals(0) && !String.Compare(cells[z], "</cell></row>").Equals(0))
                                 {
 
-                                    string[] groupNames = new string[cells.Length - z + 1];
+                                    string[] groupNames = new string[cells.Length - z + 1];//может проблема с группами тут?
                                     //file.group = new Group[cells.Length - z + 1];
                                     Group Lgroup = new Group();
 
@@ -173,6 +173,7 @@ namespace RaspFactory.Parser
                                         if (!String.Compare(cells[z + curRow], "").Equals(0) && !String.Compare(cells[z + curRow], "</cell>").Equals(0) && !String.Compare(cells[z + curRow], "</cell></row>").Equals(0))
                                         {
 
+                                            int rowWithGroups = j;
 
                                             groupNames[curRow] = cells[z + curRow];
                                             Group _groupInList = new Group()
@@ -258,18 +259,44 @@ namespace RaspFactory.Parser
                                                                 for (int para = 0; para < curDayRows; para++)
                                                                 {
                                                                     string[] mesh = rows[j + remRows + para].Split("<cell>");
-                                                                    //int bgr = 0;
 
-                                                                    /*for(int biggestRow = 0; biggestRow < curDayRows; biggestRow++)
+
+                                                                    //Необходимо отрехать от строки с группами всё лишнее в конце, посчитать целлы и создать мэшплюсодин, длинна которого будет длинной массива групп
+                                                                    int meshPlusOneIndex = 0;
+                                                                    string[] primeGroupRow = rows[rowWithGroups].Split("<cell>"); ;
+                                                                    for(int mpoi = 3; mpoi < primeGroupRow.Length; mpoi++)
                                                                     {
-                                                                        string[] probBiggest = rows[j + remRows + biggestRow].Split("<cell>");//мб не очень
-                                                                        if (probBiggest.Length > rows[j + remRows].Split("<cell>").Length)
+                                                                        if (primeGroupRow[mpoi].Contains("</cell>"))
                                                                         {
-                                                                            bgr = biggestRow;
-                                                                        }
-                                                                    }*/
+                                                                            if (primeGroupRow[mpoi].Contains("</row>"))
+                                                                            {
 
-                                                                    string[] meshPlusOne = rows[j + remRows].Split("<cell>");
+                                                                              
+                                                                                if (primeGroupRow[mpoi].ToCharArray().Length <= ("</cell></row>").ToCharArray().Length)
+                                                                                {
+                                                                                    meshPlusOneIndex = mpoi;
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                if (primeGroupRow[mpoi].ToCharArray().Length <= ("</cell>").ToCharArray().Length)
+                                                                                {
+                                                                                    meshPlusOneIndex = mpoi;
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                        }
+
+                                                                        meshPlusOneIndex = mpoi;
+                                                                    }
+
+                                                                    string[] meshPlusOne = new string[meshPlusOneIndex];
+                                                                    for(int fillmpo = 0; fillmpo < meshPlusOne.Length; fillmpo++)
+                                                                    {
+                                                                        meshPlusOne[fillmpo] = primeGroupRow[fillmpo];
+                                                                    }
+                                                                        
 
                                                                     if (mesh.Length < meshPlusOne.Length)
                                                                     {
