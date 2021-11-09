@@ -4,10 +4,10 @@ using System.IO;
 
 class Archiver
 {  
-    public static void doArchive(string sourceFolder)
+    public static void doArchive(string sourceFolder, string zipFolder)
     {
-        string zipFolder = @"P:\ITheM\Documents\TESTJSON\Conv\archives";
-        zipFolder = zipFolder.Insert(zipFolder.Length, @"\" + DateTime.Now.ToShortDateString() + ".zip");          
+ 
+        zipFolder = zipFolder.Insert(zipFolder.Length, @"\" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToFileTimeUtc() + ".zip");          
         DirectoryInfo dirInfo = new DirectoryInfo(sourceFolder);
         if (dirInfo.Exists)
         {

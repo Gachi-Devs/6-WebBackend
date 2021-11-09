@@ -9,6 +9,7 @@ namespace RaspFactory.Configuration.Models
     class ConfigModel
     {
         public string path { get; set; }
+        public string archivePath { get; set; }
         public string[] faculties { get; set; }
         public string[] formOfEdu { get; set; }
         public string[] cource { get; set; }
