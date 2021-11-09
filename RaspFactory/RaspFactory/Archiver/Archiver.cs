@@ -4,9 +4,9 @@ using System.IO;
 
 class Archiver
 {  
-    public static void archiver(string sourceFolder)
+    public static void doArchive(string sourceFolder)
     {
-        string zipFolder = @"C:\Users\VV\Desktop\c_for_university\zipFolder";
+        string zipFolder = @"P:\ITheM\Documents\TESTJSON\Conv\archives";
         zipFolder = zipFolder.Insert(zipFolder.Length, @"\" + DateTime.Now.ToShortDateString() + ".zip");          
         DirectoryInfo dirInfo = new DirectoryInfo(sourceFolder);
         if (dirInfo.Exists)

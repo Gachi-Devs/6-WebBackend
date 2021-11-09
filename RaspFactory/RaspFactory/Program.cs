@@ -14,16 +14,17 @@ namespace RaspFactory
                 Converter.Converter.GetXmlFromXls(xlsDirs[i], @"P:\ITheM\Documents\TESTJSON\Conv\xlsxInput\" + i+".xlsx");
                 Parser.Parser.Pars(Converter.Converter.GetXmlFromXls(xlsDirs[i], @"P:\ITheM\Documents\TESTJSON\Conv\xlsxInput\" + i + ".xlsx"), @"P:\ITheM\Documents\TESTJSON\Conv\jsonOutput");
             }
-            
+            Archiver.doArchive(@"P:\ITheM\Documents\TESTJSON\Conv\xlsInput");
+            DeleteUnit.deleteFiles(@"P:\ITheM\Documents\TESTJSON\Conv\xlsInput");
             /* var p = new Parser.Parser();
              p.Pars();*/
 
-            
 
 
 
 
-          
+
+
 
 
 
