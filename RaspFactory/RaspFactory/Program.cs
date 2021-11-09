@@ -8,19 +8,22 @@ namespace RaspFactory
     {
         static void Main(string[] args)
         {
-
-
-             var p = new Parser.Parser();
-             p.Pars();
+            string[] xlsDirs = Converter.GetDirs.GetAllDirs(@"P:\ITheM\Documents\TESTJSON\Conv\xlsInput");
+            for (int i = 0; i < xlsDirs.Length; i++)
+            {
+                Converter.Converter.GetXmlFromXls(xlsDirs[i], @"P:\ITheM\Documents\TESTJSON\Conv\xlsxInput\" + i+".xlsx");
+                Parser.Parser.Pars(Converter.Converter.GetXmlFromXls(xlsDirs[i], @"P:\ITheM\Documents\TESTJSON\Conv\xlsxInput\" + i + ".xlsx"), @"P:\ITheM\Documents\TESTJSON\Conv\jsonOutput");
+            }
+            
+            /* var p = new Parser.Parser();
+             p.Pars();*/
 
             
 
 
 
 
-            /*string sos = new string("<sos></sos><sos></sos><sos>текст</sos><sos></sos>");
-            Console.WriteLine(sos.Remove(sos.LastIndexOf("<sos></sos>")));
-            */
+          
 
 
 

@@ -15,9 +15,9 @@ namespace RaspFactory.Parser
 
         public string xmlFile { get; private set; }
 
-        public void Pars()
+        public static void Pars(string xmlFile, string path)
         {
-            string xmlFile = "";
+            /*string xmlFile = "";
             string path = "P:\\ITheM\\Documents\\TESTJSON\\1.xml";
             String line;
             try
@@ -47,34 +47,22 @@ namespace RaspFactory.Parser
             finally
             {
                 Console.WriteLine("Executing finally block.");
-            }
+            }*/
 
 
             Console.WriteLine("-----------------------------------------------");
 
-            var Config = JsonConvert.DeserializeObject<Configuration.Models.ConfigModel>(File.ReadAllText(@"R:\Документы\JetBrains_C#\RaspFactory\RaspFactory\Configuration\Config.json"));
+            var Config = JsonConvert.DeserializeObject<Configuration.Models.ConfigModel>(File.ReadAllText(@"R:\Документы\GIT\6-WebBackend\RaspFactory\RaspFactory\Configuration\Config.json"));
             string pathToEndFiles = Config.path;
 
 
-            //int findex = 228;
+            
             string[] sheet = xmlFile.Split("<sheet name=");
             for (int i = 1; i < sheet.Length; i++)
             {
 
                 
-              /*  var _mrasp = new List<MRaspisanie>();
-                var _groups = new List<Group>();
-                var _weekdays = new List<DayOfWeek>();
-                var _listOfWeekDays = new List<List<DayOfWeek>>();
-                var _couples = new List<Couples>();
-                var _listOfCouples = new List<List<Couples>>();
-                var _listOfListOfCouples = new List<List<List<Couples>>>();
-
-                MRaspisanie file = new MRaspisanie();
-               // string fileName = "DATA";//Сделать id файла
-                bool isFCFull = false;
-                bool isGroupsFull = false;
-                bool isCourceFind = false;*/
+             
 
 
 
@@ -106,7 +94,7 @@ namespace RaspFactory.Parser
                     var _listOfListOfCouples = new List<List<List<Couples>>>();
 
                     MRaspisanie file = new MRaspisanie();
-                    // string fileName = "DATA";//Сделать id файла
+                    
                     bool isFCFull = false;
                     bool isGroupsFull = false;
                     bool isCourceFind = false;
@@ -165,7 +153,7 @@ namespace RaspFactory.Parser
                                 {
 
                                     string[] groupNames = new string[cells.Length - z + 1];//может проблема с группами тут?
-                                    //file.group = new Group[cells.Length - z + 1];
+                                   
                                     Group Lgroup = new Group();
 
                                     for (int curRow = 0; curRow < cells.Length - z; curRow++)
@@ -200,7 +188,7 @@ namespace RaspFactory.Parser
 
                                             //Заполнение групп
                                             bool is1DayFound = false;
-                                            // Console.WriteLine($"}}}}}}}}}}}}}}}}}}}}}} ЭТО {j+1} СТРОКА ИЗ {rows.Length}");
+                                            
                                             for (int remRows = 1; remRows < rows.Length - j; remRows++)
                                             {
 
@@ -252,7 +240,7 @@ namespace RaspFactory.Parser
 
                                                                             break;
                                                                         }
-                                                                    }//Console.WriteLine(mesh[cellInCurRightRow]); 
+                                                                    }
                                                                     if (curDayRows != 0) break;
                                                                 }
 
@@ -298,8 +286,7 @@ namespace RaspFactory.Parser
                                                                         meshPlusOne[fillmpo] = meshPlusOne[fillmpo];
                                                                     }
                                                                         
-                                                                    //Нужно сделать что то похожее на код выше, тк строка в файле 11310 в среде 13:45 некорректно отображается, видимо mesh якобы больше и ему не добавляется пустаяячейка
-                                                                    //а я уже сделал это на строке ниже спасибо
+                                                            
                                                                     if(mesh.Length >= meshPlusOne.Length && mesh.Length < primeGroupRow.Length)
                                                                     {
                                                                         mesh = new string[primeGroupRow.Length - (primeGroupRow.Length - meshPlusOneIndex)];
@@ -313,7 +300,7 @@ namespace RaspFactory.Parser
 
                                                                     if (mesh.Length < meshPlusOne.Length)
                                                                     {
-                                                                        // meshPlusOne = new string[rows[j + remRows + para + 1].Split("<cell>").Length];
+                                                                        
                                                                         bool isFour = false;
                                                                         for (int _cells = 0; _cells < meshPlusOne.Length-1; _cells++)
                                                                         {
@@ -327,7 +314,7 @@ namespace RaspFactory.Parser
                                                                             else if (_cells == 4)
                                                                             {
 
-                                                                                meshPlusOne[_cells] = "";//в самый первый раз стирается значение, надо двигать
+                                                                                meshPlusOne[_cells] = "";
 
                                                                                 isFour = true;
                                                                             }
@@ -342,7 +329,7 @@ namespace RaspFactory.Parser
                                                                             Console.WriteLine("{0} {1}  --- MPO - b", meshPlusOne[3], meshPlusOne[4 + curRow - ((4 + curRow - mesh.Length + 1))]);
                                                                             if ((para + 1) % 2 != 0)
                                                                             {
-                                                                                //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+                                                                                
 
                                                                                 Couples lCouples = new Couples()
                                                                                 {
@@ -363,7 +350,7 @@ namespace RaspFactory.Parser
                                                                             Console.WriteLine("{0} {1}  --- MPO -g", meshPlusOne[3], meshPlusOne[4 + curRow]);
                                                                             if ((para + 1) % 2 != 0)
                                                                             {
-                                                                                //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+                                                                                
 
                                                                                 Couples lCouples = new Couples()
                                                                                 {
@@ -390,7 +377,7 @@ namespace RaspFactory.Parser
                                                                             Console.WriteLine("{0} {1} - b", mesh[3], mesh[4 + curRow - (4 + curRow - mesh.Length + 1)]);
                                                                             if ((para + 1) % 2 != 0)
                                                                             {
-                                                                                //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+                                                                               
 
                                                                                 Couples lCouples = new Couples()
                                                                                 {
@@ -412,7 +399,7 @@ namespace RaspFactory.Parser
                                                                             Console.WriteLine("{0} {1} -g", mesh[3], mesh[4 + curRow]);
                                                                             if ((para + 1) % 2 != 0)
                                                                             {
-                                                                                //file.group[curRow].week[dotw].couples[coupleId] = new Couples();
+                                                                             
 
                                                                                 Couples lCouples = new Couples()
                                                                                 {
@@ -493,14 +480,11 @@ namespace RaspFactory.Parser
 
 
 
-                            Console.WriteLine(cells[z]);
+                            //Console.WriteLine(cells[z]);
 
                         }
                     }
-               /* if(iow == 0)
-                    {
-                        continue;
-                    }*/
+             
 
                 _mrasp.Add(file);
 
@@ -508,7 +492,7 @@ namespace RaspFactory.Parser
                 Console.WriteLine($"///////////////////////////////////////////\n{file.faculty}{file.formOfEdu}{file.cource}{file.weekId}");
 
 
-                //for (int jopa = 0; jopa < file.group.Length - 1; jopa++) Console.WriteLine(file.group[jopa].groupName);
+             
                 Console.WriteLine(_mrasp.Count);
                     //Тут сериализация
 

@@ -8,91 +8,74 @@ using Newtonsoft.Json;
 
 namespace RaspFactory.Converter
 {
-    class Converter
+   public class Converter
     {
-        static void Convert(string[] args)
+       
+
+        public static String GetXmlFromXls(String xlsPath, String xlsxPath)
         {
-            String destPath = @"C:\Users\Win10_Game_OS\OneDrive\Рабочий стол\ffff\ddd.xlsx";
-            String dirPath = @"C:\Users\Win10_Game_OS\OneDrive\Рабочий стол\ffff\fff.xls";
-              XlsToXlsx2 testXlsx = new XlsToXlsx2();
-            testXlsx.ConvertToXlsxFile(dirPath, destPath);
+
+            XlsxToXml convertXML = new XlsxToXml();
+
+            XlsToXlsx convertXlsx = new XlsToXlsx();
+
+            convertXlsx.ConvertToXlsxFile(xlsPath, xlsxPath);
+
+            string exelSTR = convertXML.ConvertByFile(xlsxPath);
 
 
-
-            XlsxToXml testXML = new XlsxToXml();
-            testXML.ConvertByFile(destPath);
-
-
-               
-            
-
-            String exelSTR = testXML.ConvertByFile(destPath);
-
-
-            var book = new Workbook(destPath);
-            book.Save(@"C:\Users\Win10_Game_OS\OneDrive\Рабочий стол\ffff\Test2.xml", Aspose.Cells.SaveFormat.Auto);
-
-
-
-            
-
-
-
-
-
-            try
-            {
-               
-                StreamWriter sw = new StreamWriter(@"C:\Users\Win10_Game_OS\OneDrive\Рабочий стол\ffff\Test.xml");
-               
-                sw.WriteLine(exelSTR);
-                
-                
-                sw.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
-
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(exelSTR);
-            string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-
-            try
-            {
-
-                StreamWriter sw = new StreamWriter(@"C:\Users\Win10_Game_OS\OneDrive\Рабочий стол\ffff\Test.json");
-
-                sw.WriteLine(jsonText);
-
-
-                sw.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
-
-
-
-
-            // To convert JSON text contained in string json into an XML node
-
-
-
-
+            return exelSTR;
 
 
         }
+
+
+
+
+      public static String GetXmlFromXlsx(String xlsxPath)
+      {
+
+
+
+            XlsxToXml convertXML = new XlsxToXml();
+
+            string exelSTR = convertXML.ConvertByFile(xlsxPath);
+
+
+            return exelSTR;
+      }
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
