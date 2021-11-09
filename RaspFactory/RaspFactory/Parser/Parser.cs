@@ -52,7 +52,7 @@ namespace RaspFactory.Parser
 
             Console.WriteLine("-----------------------------------------------");
 
-            var Config = JsonConvert.DeserializeObject<Configuration.Models.ConfigModel>(File.ReadAllText(@"R:\Документы\GIT\6-WebBackend\RaspFactory\RaspFactory\Configuration\Config.json"));
+            var Config = JsonConvert.DeserializeObject<Configuration.Models.ConfigModel>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "\\Configuration\\Config.json"));
             string pathToEndFiles = Config.path;
 
 

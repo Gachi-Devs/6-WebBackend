@@ -1,6 +1,7 @@
 ﻿using RaspFactory.Parser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace RaspFactory
 {
@@ -8,14 +9,18 @@ namespace RaspFactory
     {
         static void Main(string[] args)
         {
-            string[] xlsDirs = Converter.GetDirs.GetAllDirs(@"P:\ITheM\Documents\TESTJSON\Conv\xlsInput");
+
+            AppDomain domain = AppDomain.CurrentDomain;
+            string pathOfProject = domain.BaseDirectory;
+
+            string[] xlsDirs = Converter.GetDirs.GetAllDirs(Path.Combine(domain.BaseDirectory, "xlsInput"));
             for (int i = 0; i < xlsDirs.Length; i++)
             {
-                Converter.Converter.GetXmlFromXls(xlsDirs[i], @"P:\ITheM\Documents\TESTJSON\Conv\xlsxInput\" + i+".xlsx");
-                Parser.Parser.Pars(Converter.Converter.GetXmlFromXls(xlsDirs[i], @"P:\ITheM\Documents\TESTJSON\Conv\xlsxInput\" + i + ".xlsx"), @"P:\ITheM\Documents\TESTJSON\Conv\jsonOutput");
+                Converter.Converter.GetXmlFromXls(xlsDirs[i], pathOfProject + "\\xlsxInput\\" + i+".xlsx");
+                Parser.Parser.Pars(Converter.Converter.GetXmlFromXls(xlsDirs[i], pathOfProject + "\\xlsxInput\\" + i + ".xlsx"), pathOfProject + "\\jsonOutput");
             }
-            Archiver.doArchive(@"P:\ITheM\Documents\TESTJSON\Conv\xlsInput");
-            DeleteUnit.deleteFiles(@"P:\ITheM\Documents\TESTJSON\Conv\xlsInput");
+            Archiver.doArchive(pathOfProject + "\\xlsInput");
+           // DeleteUnit.deleteFiles(@"P:\ITheM\Documents\TESTJSON\Conv\xlsInput");
             /* var p = new Parser.Parser();
              p.Pars();*/
 
