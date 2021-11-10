@@ -1,0 +1,10 @@
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\bin\Debug\VisualRasp.exe.config
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\bin\Debug\VisualRasp.exe
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\bin\Debug\VisualRasp.pdb
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\obj\Debug\VisualRasp.csproj.AssemblyReference.cache
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\obj\Debug\VisualRasp.Form1.resources
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\obj\Debug\VisualRasp.Properties.Resources.resources
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\obj\Debug\VisualRasp.csproj.GenerateResource.cache
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\obj\Debug\VisualRasp.csproj.CoreCompileInputs.cache
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\obj\Debug\VisualRasp.exe
+R:\Документы\GIT\6-WebBackend\RaspFactory\VisualRasp\obj\Debug\VisualRasp.pdb
