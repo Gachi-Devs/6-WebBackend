@@ -1,0 +1,10 @@
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\bin\Debug\RaspClient.exe.config
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\bin\Debug\RaspClient.exe
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\bin\Debug\RaspClient.pdb
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.AssemblyReference.cache
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.Form1.resources
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.Properties.Resources.resources
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.GenerateResource.cache
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.CoreCompileInputs.cache
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.exe
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.pdb
