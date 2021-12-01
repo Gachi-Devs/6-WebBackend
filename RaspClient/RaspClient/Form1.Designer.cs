@@ -33,20 +33,21 @@ namespace RaspClient
             this.radioLocal = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.facultyBox = new System.Windows.Forms.ComboBox();
+            this.foeBox = new System.Windows.Forms.ComboBox();
+            this.courceBox = new System.Windows.Forms.ComboBox();
+            this.groupBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.weekBox = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +62,7 @@ namespace RaspClient
             this.radioAPI.TabStop = true;
             this.radioAPI.Text = "Через API";
             this.radioAPI.UseVisualStyleBackColor = true;
+            this.radioAPI.CheckedChanged += new System.EventHandler(this.radioAPI_CheckedChanged);
             // 
             // radioLocal
             // 
@@ -90,40 +92,42 @@ namespace RaspClient
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // comboBox1
+            // facultyBox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.facultyBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.facultyBox.FormattingEnabled = true;
+            this.facultyBox.Items.AddRange(new object[] {
             "Факультет информационных технологий",
             "Факультет управления",
             "Факультет экономики и финансов",
             "Факультет юридический"});
-            this.comboBox1.Location = new System.Drawing.Point(9, 169);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.facultyBox.Location = new System.Drawing.Point(9, 169);
+            this.facultyBox.Name = "facultyBox";
+            this.facultyBox.Size = new System.Drawing.Size(215, 21);
+            this.facultyBox.TabIndex = 4;
+            this.facultyBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // comboBox2
+            // foeBox
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.foeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.foeBox.FormattingEnabled = true;
+            this.foeBox.Items.AddRange(new object[] {
             "Очная",
             "Заочная (выходного дня) на базе СПО",
             "Очно-заочная (выходного дня)"});
-            this.comboBox2.Location = new System.Drawing.Point(9, 237);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 5;
+            this.foeBox.Location = new System.Drawing.Point(9, 237);
+            this.foeBox.Name = "foeBox";
+            this.foeBox.Size = new System.Drawing.Size(215, 21);
+            this.foeBox.TabIndex = 5;
+            this.foeBox.SelectedIndexChanged += new System.EventHandler(this.foeBox_SelectedIndexChanged);
             // 
-            // comboBox4
+            // courceBox
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
+            this.courceBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.courceBox.FormattingEnabled = true;
+            this.courceBox.Items.AddRange(new object[] {
             "1 курс",
             "1 курс СПО",
             "2 курс",
@@ -132,20 +136,22 @@ namespace RaspClient
             "3 курс СПО",
             "4 курс",
             "4 курс СПО"});
-            this.comboBox4.Location = new System.Drawing.Point(9, 294);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 6;
+            this.courceBox.Location = new System.Drawing.Point(9, 294);
+            this.courceBox.Name = "courceBox";
+            this.courceBox.Size = new System.Drawing.Size(215, 21);
+            this.courceBox.TabIndex = 6;
+            this.courceBox.SelectedIndexChanged += new System.EventHandler(this.courceBox_SelectedIndexChanged);
             // 
-            // comboBox3
+            // groupBox
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.comboBox3.Location = new System.Drawing.Point(9, 356);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 7;
+            this.groupBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.groupBox.FormattingEnabled = true;
+            this.groupBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.groupBox.Location = new System.Drawing.Point(9, 356);
+            this.groupBox.Name = "groupBox";
+            this.groupBox.Size = new System.Drawing.Size(215, 21);
+            this.groupBox.TabIndex = 7;
+            this.groupBox.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -193,15 +199,16 @@ namespace RaspClient
             this.label5.TabIndex = 13;
             this.label5.Text = "Неделя";
             // 
-            // comboBox5
+            // weekBox
             // 
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.comboBox5.Location = new System.Drawing.Point(9, 416);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(121, 21);
-            this.comboBox5.TabIndex = 12;
+            this.weekBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.weekBox.FormattingEnabled = true;
+            this.weekBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.weekBox.Location = new System.Drawing.Point(9, 416);
+            this.weekBox.Name = "weekBox";
+            this.weekBox.Size = new System.Drawing.Size(215, 21);
+            this.weekBox.TabIndex = 12;
+            this.weekBox.SelectedIndexChanged += new System.EventHandler(this.weekBox_SelectedIndexChanged);
             // 
             // tabControl1
             // 
@@ -228,7 +235,7 @@ namespace RaspClient
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
+            this.tabPage2.Size = new System.Drawing.Size(733, 588);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -242,27 +249,36 @@ namespace RaspClient
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(273, 13);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 681);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox5);
+            this.Controls.Add(this.weekBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.groupBox);
+            this.Controls.Add(this.courceBox);
+            this.Controls.Add(this.foeBox);
+            this.Controls.Add(this.facultyBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -277,20 +293,21 @@ namespace RaspClient
         private System.Windows.Forms.RadioButton radioLocal;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox facultyBox;
+        private System.Windows.Forms.ComboBox foeBox;
+        private System.Windows.Forms.ComboBox courceBox;
+        private System.Windows.Forms.ComboBox groupBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox weekBox;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
