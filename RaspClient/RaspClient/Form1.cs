@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,8 +48,18 @@ namespace RaspClient
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string url = $"http://18.185.249.19/api/commands/{this.id.getId()}";
+
+           
+            using (var webClient = new WebClient())
+            {
+                // Выполняем запрос по адресу и получаем ответ в виде строки
+                var response = webClient.DownloadString(url);
+                textBox2.Text = response;
+            }
             textBox1.Text = this.id.getId();
-            MessageBox.Show("Один из элементов списка указан не верно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+           
         }
 
         private void foeBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -63,7 +74,7 @@ namespace RaspClient
 
         private void weekBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.id.week = weekBox.SelectedIndex;
+            this.id.week = int.Parse(weekBox.Text);
         }
     }
 
@@ -79,7 +90,7 @@ namespace RaspClient
         {
             try
             {
-                return $"{faculty+1}{foe+1}{cource+1}{week+1}";
+                return $"{faculty+1}{foe+1}{cource+1}{week}";
             }
             catch(Exception e)
             {
