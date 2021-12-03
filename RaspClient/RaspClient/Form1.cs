@@ -39,6 +39,19 @@ namespace RaspClient
         private void Form1_Load(object sender, EventArgs e)
         {
             radioAPI.Checked = true;
+
+            string url = $"http://18.185.249.19/api/commands/weeks";
+            string weeks = "";
+            using (var webClient = new WebClient())
+            {
+
+                weeks = webClient.DownloadString(url);
+            }
+            string[] weeksArray = weeks.Split(',');
+            for (int iterator = 0; iterator < weeksArray.Length; iterator++) 
+            {
+                weekBox.Items.Add(weeksArray[iterator]);
+            }
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,7 +67,8 @@ namespace RaspClient
             using (var webClient = new WebClient())
             {
                 // Выполняем запрос по адресу и получаем ответ в виде строки
-                var response = webClient.DownloadString(url);
+                byte[] bytes = Encoding.Default.GetBytes(webClient.DownloadString(url));
+                var response = Encoding.UTF8.GetString(bytes);
                 textBox2.Text = response;
             }
             textBox1.Text = this.id.getId();
@@ -74,7 +88,12 @@ namespace RaspClient
 
         private void weekBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.id.week = int.Parse(weekBox.Text);
+            this.id.week = int.Parse(weekBox.SelectedItem.ToString());
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 
@@ -99,5 +118,20 @@ namespace RaspClient
             }
 
         }
+    }
+
+    public class TimeTableContext
+    {
+
+        public string context { get; set; }
+
+        public TimeTableContext(string context)
+        {
+            this.context = context;
+
+        }
+
+       
+
     }
 }

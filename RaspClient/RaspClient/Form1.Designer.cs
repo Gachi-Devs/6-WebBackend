@@ -45,10 +45,10 @@ namespace RaspClient
             this.weekBox = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -206,8 +206,6 @@ namespace RaspClient
             this.weekBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.weekBox.FormattingEnabled = true;
             this.weekBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.weekBox.Items.AddRange(new object[] {
-            "14"});
             this.weekBox.Location = new System.Drawing.Point(9, 416);
             this.weekBox.Name = "weekBox";
             this.weekBox.Size = new System.Drawing.Size(215, 21);
@@ -234,6 +232,17 @@ namespace RaspClient
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(12, 18);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.textBox2.Size = new System.Drawing.Size(683, 530);
+            this.textBox2.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -260,15 +269,6 @@ namespace RaspClient
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 16;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(12, 18);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBox2.Size = new System.Drawing.Size(683, 20);
-            this.textBox2.TabIndex = 0;
             // 
             // Form1
             // 

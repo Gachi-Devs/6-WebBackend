@@ -1,27 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {}
+    "C:\\Users\\Студент\\Documents\\GitHub\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {}
   },
   "projects": {
-    "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {
+    "C:\\Users\\Студент\\Documents\\GitHub\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
+        "projectUniqueName": "C:\\Users\\Студент\\Documents\\GitHub\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
         "projectName": "RaspFactory",
-        "projectPath": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
-        "packagesPath": "C:\\Users\\ITheM\\.nuget\\packages\\",
-        "outputPath": "R:\\Документы\\GIT\\6-WebBackend\\RaspFactory\\RaspFactory\\obj\\",
+        "projectPath": "C:\\Users\\Студент\\Documents\\GitHub\\6-WebBackend\\RaspFactory\\RaspFactory\\RaspFactory.csproj",
+        "packagesPath": "C:\\Users\\Студент\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Студент\\Documents\\GitHub\\6-WebBackend\\RaspFactory\\RaspFactory\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "R:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ITheM\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Студент\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -82,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

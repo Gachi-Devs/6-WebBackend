@@ -8,3 +8,13 @@ R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClien
 R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.CoreCompileInputs.cache
 R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.exe
 R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.pdb
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\bin\Debug\RaspClient.exe.config
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\bin\Debug\RaspClient.exe
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\bin\Debug\RaspClient.pdb
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.AssemblyReference.cache
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.Form1.resources
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.Properties.Resources.resources
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.GenerateResource.cache
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.CoreCompileInputs.cache
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.exe
+C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.pdb
