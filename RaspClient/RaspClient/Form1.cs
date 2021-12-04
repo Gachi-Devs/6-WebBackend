@@ -43,6 +43,13 @@ namespace RaspClient
         private void Form1_Load(object sender, EventArgs e)
         {
             radioAPI.Checked = true;
+            timetableView.FullRowSelect = true;
+
+            timetableView.Columns.Add("День недели", 100, HorizontalAlignment.Center);
+            timetableView.Columns.Add("Дата", 100, HorizontalAlignment.Center);
+            timetableView.Columns.Add("Время", 100, HorizontalAlignment.Center);
+            timetableView.Columns.Add("Пара", 300, HorizontalAlignment.Center);
+            timetableView.Columns.Add("Доп. инф.", 200, HorizontalAlignment.Center);
 
             string url = $"http://18.185.249.19/api/commands/weeks";
             string weeks = "";
@@ -61,6 +68,37 @@ namespace RaspClient
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.jsonTimeTable = jsonTimeTable;
+
+            for (int iterator = 0; iterator < jsonTimeTable.group.Length; iterator++)
+            {
+                
+
+                for (int jterator = 0; jterator < jsonTimeTable.group[iterator].week.Length; jterator++) 
+
+                {
+                    ListViewItem row = new ListViewItem(jsonTimeTable.group[groupBox.SelectedIndex].week[iterator].dayName);
+
+                    ListViewItem.ListViewSubItem date = new ListViewItem.ListViewSubItem(row, 
+                        jsonTimeTable.group[groupBox.SelectedIndex].week[iterator].date);
+
+                    ListViewItem.ListViewSubItem time = new ListViewItem.ListViewSubItem(row,
+                        jsonTimeTable.group[groupBox.SelectedIndex].week[iterator].couples[jterator].time);
+
+                    ListViewItem.ListViewSubItem discipline = new ListViewItem.ListViewSubItem(row,
+                        jsonTimeTable.group[groupBox.SelectedIndex].week[iterator].couples[jterator].discipline);
+
+                    ListViewItem.ListViewSubItem other = new ListViewItem.ListViewSubItem(row,
+                       jsonTimeTable.group[groupBox.SelectedIndex].week[iterator].couples[jterator].otherInfo);
+
+
+                    row.SubItems.Add(date);
+                    row.SubItems.Add(time);
+                    row.SubItems.Add(discipline);
+                    row.SubItems.Add(other);
+                    timetableView.Items.Add(row);
+                }
+                
+            }
           
 
         }

@@ -236,12 +236,14 @@ namespace RaspClient
             // 
             // timetableView
             // 
+            this.timetableView.GridLines = true;
             this.timetableView.HideSelection = false;
-            this.timetableView.Location = new System.Drawing.Point(312, 12);
+            this.timetableView.Location = new System.Drawing.Point(245, 12);
             this.timetableView.Name = "timetableView";
-            this.timetableView.Size = new System.Drawing.Size(620, 620);
+            this.timetableView.Size = new System.Drawing.Size(807, 620);
             this.timetableView.TabIndex = 17;
             this.timetableView.UseCompatibleStateImageBehavior = false;
+            this.timetableView.View = System.Windows.Forms.View.Details;
             // 
             // Form1
             // 
