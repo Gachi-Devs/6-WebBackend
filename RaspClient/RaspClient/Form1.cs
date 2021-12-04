@@ -69,11 +69,13 @@ namespace RaspClient
         {
             this.jsonTimeTable = jsonTimeTable;
 
-            for (int iterator = 0; iterator < jsonTimeTable.group.Length; iterator++)
+            timetableView.Items.Clear();
+
+            for (int iterator = 0; iterator < jsonTimeTable.group[groupBox.SelectedIndex].week.Length; iterator++)
             {
                 
 
-                for (int jterator = 0; jterator < jsonTimeTable.group[iterator].week.Length; jterator++) 
+                for (int jterator = 0; jterator < jsonTimeTable.group[groupBox.SelectedIndex].week[iterator].couples.Length; jterator++) 
 
                 {
                     ListViewItem row = new ListViewItem(jsonTimeTable.group[groupBox.SelectedIndex].week[iterator].dayName);
