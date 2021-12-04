@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RaspClient.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,8 @@ namespace RaspClient
     {
 
         private idFromBoxes id = new idFromBoxes();
+
+        private MRaspisanie jsonTimeTable = new MRaspisanie();
 
         public Form1()
         {
@@ -56,7 +60,9 @@ namespace RaspClient
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //this.id.faculty = facultyBox.SelectedIndex;
+            this.jsonTimeTable = jsonTimeTable;
+          
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -69,11 +75,17 @@ namespace RaspClient
                 // Выполняем запрос по адресу и получаем ответ в виде строки
                 byte[] bytes = Encoding.Default.GetBytes(webClient.DownloadString(url));
                 var response = Encoding.UTF8.GetString(bytes);
-                textBox2.Text = response;
+                textBox2.Text = response;//
+                this.jsonTimeTable = JsonConvert.DeserializeObject<MRaspisanie>(response);
             }
             textBox1.Text = this.id.getId();
-            
-           
+
+            groupBox.Items.Clear();
+            for (int iterator = 0; iterator < jsonTimeTable.group.Length; iterator++)
+            {
+                groupBox.Items.Add(jsonTimeTable.group[iterator].groupName);
+            }
+
         }
 
         private void foeBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,10 +140,9 @@ namespace RaspClient
         public TimeTableContext(string context)
         {
             this.context = context;
-
         }
 
-       
-
     }
+
+    
 }

@@ -18,3 +18,5 @@ C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\
 C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.csproj.CoreCompileInputs.cache
 C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.exe
 C:\Users\Студент\Documents\GitHub\6-WebBackend\RaspClient\RaspClient\obj\Debug\RaspClient.pdb
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\bin\Debug\Newtonsoft.Json.dll
+R:\Документы\GIT\6-WebBackend\RaspClient\RaspClient\bin\Debug\Newtonsoft.Json.xml
